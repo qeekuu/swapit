@@ -1,5 +1,5 @@
 import { View, Alert } from "react-native";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "expo-router";
 import { Typography } from "@/components/ui/Typography";
 import { ScreenWrapper } from "@/components/wrappers/ScreenWrapper";
@@ -16,13 +16,19 @@ export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPass, setShowPass] = useState(false);
+  const isFirstLogin = useRef(true);
 
   const login = () => {
     if (!email.trim() || !password.trim()) {
       Alert.alert('Missing fields', 'Please enter your email and password.');
       return;
     }
-    router.replace('/(tabs)');
+    if (isFirstLogin.current) {
+      isFirstLogin.current = false;
+      router.replace('/onboarding');
+    } else {
+      router.replace('/(tabs)');
+    }
   };
 
   return (
