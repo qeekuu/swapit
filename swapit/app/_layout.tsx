@@ -13,6 +13,8 @@ export default function RootLayout() {
         <Stack.Screen name="detail/[id]" options={{ animation: 'slide_from_right' }} />
         <Stack.Screen name="forgot-password" options={{ animation: 'slide_from_bottom' }} />
         <Stack.Screen name="sign-up" options={{ animation: 'slide_from_bottom' }} />
+        <Stack.Screen name="faq" options={{ animation: 'slide_from_right' }} />
+        <Stack.Screen name="onboarding" options={{ animation: 'fade', gestureEnabled: false }} />
       </Stack>
     </SafeAreaProvider>
   );

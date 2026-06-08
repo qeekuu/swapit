@@ -130,10 +130,19 @@ export default function ProfileScreen() {
         </View>
       )}
 
+      {/* Help & FAQ */}
+      <AnimatedPressable
+        onPress={() => router.push('/faq')}
+        className="flex-row items-center justify-center gap-2 rounded-full border-[3px] border-primary dark:border-primary-dark py-3 mt-6"
+      >
+        <Ionicons name="help-circle-outline" size={18} color={theme.primary} />
+        <Typography className="font-semibold text-primary dark:text-primary-dark">Help & FAQ</Typography>
+      </AnimatedPressable>
+
       {/* Sign out */}
       <AnimatedPressable
         onPress={logout}
-        className="flex-row items-center justify-center gap-2 rounded-full border-[3px] border-secondary dark:border-secondary-dark py-3 mt-6 mb-4"
+        className="flex-row items-center justify-center gap-2 rounded-full border-[3px] border-secondary dark:border-secondary-dark py-3 mt-3 mb-4"
       >
         <Ionicons name="log-out-outline" size={18} color={theme.muted} />
         <Typography variant="muted" className="font-semibold">Sign out</Typography>
