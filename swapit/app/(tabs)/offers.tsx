@@ -16,6 +16,21 @@ export default function OffersScreen() {
   const [statuses, setStatuses] = useState<Record<string, Status>>({});
 
   const resolve = (id: string, status: Status) => {
+    if (status === 'rejected') {
+      Alert.alert(
+        'Decline proposal',
+        'Are you sure you want to decline this swap proposal?',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          {
+            text: 'Decline',
+            style: 'destructive',
+            onPress: () => setStatuses(prev => ({ ...prev, [id]: 'rejected' })),
+          },
+        ]
+      );
+      return;
+    }
     setStatuses(prev => ({ ...prev, [id]: status }));
     if (status === 'accepted')
       Alert.alert('Swap accepted!', 'You can now arrange a meetup to exchange items.');
