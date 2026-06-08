@@ -1,5 +1,5 @@
-import { View, ScrollView, TextInput, Pressable } from "react-native";
-import { useState } from "react";
+import { View, ScrollView, TextInput, Pressable, ActivityIndicator } from "react-native";
+import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { ScreenWrapper } from "@/components/wrappers/ScreenWrapper";
@@ -25,6 +25,12 @@ export default function HomeScreen() {
   const theme = Colors[scheme];
   const [search, setSearch] = useState('');
   const [activeCat, setActiveCat] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 800);
+    return () => clearTimeout(timer);
+  }, []);
 
   const activeCatOrAll = activeCat || 'All';
   const filtered = ITEMS.filter(it =>
@@ -104,7 +110,12 @@ export default function HomeScreen() {
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
-        {filtered.length === 0 ? (
+        {loading ? (
+          <View className="items-center py-16">
+            <ActivityIndicator size="large" color={theme.primary} />
+            <Typography variant="muted" className="mt-3">Loading listings...</Typography>
+          </View>
+        ) : filtered.length === 0 ? (
           <View className="items-center py-16 gap-3">
             <Ionicons name="search-outline" size={48} color={theme.muted} />
             <Typography variant="subTitle">No listings found</Typography>
